@@ -1,5 +1,9 @@
+# typedefs tell graphql the shape of our data
+# we will pass typedefs in server
 type User {
   _id: ID
+  # !required
+  #@unique unique
   username: String! @unique
   email: String!
   password: String!
@@ -15,6 +19,7 @@ type Post {
   description: String!
   createdDate: String
   likes: Int
+  # User cause we have the ref in mongo
   createdBy: User!
   messages: [Message]
 }
@@ -29,7 +34,7 @@ type Message {
 type Query {
   getPosts: [Post]
 }
-
+# Mutation to add data 
 type Mutation {
   addPost(
     title: String!
@@ -38,5 +43,8 @@ type Mutation {
     description: String!
     creatorId: ID!
   ): Post!
+  # ** need to add resolver
+  # pass arguments with types 
+  # :User! apecifies what we want to return
   signupUser(username: String!, email: String!, password: String!): User!
 }

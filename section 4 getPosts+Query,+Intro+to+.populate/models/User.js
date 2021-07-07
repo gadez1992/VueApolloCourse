@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    //all username are unique
     unique: true,
     trim: true
   },
@@ -25,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   },
   favorites: {
+    //id created by mongo db 
     type: [mongoose.Schema.Types.ObjectId],
     required: true,
     ref: "Post"

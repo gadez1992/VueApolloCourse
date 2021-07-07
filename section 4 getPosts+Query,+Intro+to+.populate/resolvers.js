@@ -25,11 +25,16 @@ module.exports = {
       }).save();
       return newPost;
     },
+    // 1st param _, root wont use on this course
+    // 2nd param all arguments in typeDefs
+    // 3rd param context which allows us to pass the {User} model 
     signupUser: async (_, { username, email, password }, { User }) => {
+      // if username give an error
       const user = await User.findOne({ username });
       if (user) {
         throw new Error("User already exists");
       }
+      // create a new user
       const newUser = await new User({
         username,
         email,

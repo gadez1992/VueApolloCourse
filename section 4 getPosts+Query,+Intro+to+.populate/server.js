@@ -4,10 +4,12 @@ const fs = require("fs");
 const path = require("path");
 
 const filePath = path.join(__dirname, "typeDefs.gql");
+// pass typeDefs to server
 const typeDefs = fs.readFileSync(filePath, "utf-8");
 const resolvers = require("./resolvers");
 
-require("dotenv").config({ path: "variables.env" });
+require('dotenv').config({ path: "variables.env" });
+// import schemas
 const User = require("./models/User");
 const Post = require("./models/Post");
 
@@ -22,6 +24,7 @@ mongoose
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  //pass schemas to Apollo server
   context: {
     User,
     Post
